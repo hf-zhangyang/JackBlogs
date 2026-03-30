@@ -2,11 +2,14 @@ import { defineConfig } from 'vitepress'
 
 // 🔴 关键配置：把下面的 /my-tech-blogs/ 换成你的仓库名！
 // 格式必须是 /仓库名/，比如你的仓库叫 my-tech-blogs，就填 /my-tech-blogs/
-const repoName = '/my-tech-blog/'
+const repoName = '/my-tech-blogs/'
+
+// 本地开发使用根路径，生产环境使用仓库名路径
+const base = process.env.NODE_ENV === 'production' ? repoName : '/'
 
 export default defineConfig({
   // 网站基础路径（GitHub Pages 必须配置，否则样式会错乱）
-  base: repoName,
+  base: base,
   // 网站标题
   title: "我的技术博客",
   // 网站描述
@@ -19,7 +22,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '技术指南', link: '/guide/intro' },
-      { text: '博客文章', link: '/blog/' },
+      { text: '博客文章', link: '/articles/' },
       { text: '关于我', link: '/about' }
     ],
 
@@ -41,14 +44,15 @@ export default defineConfig({
           ]
         }
       ],
-      '/blog/': [
+      '/articles/': [
         {
           text: '技术博客',
           collapsible: true,
           collapsed: false,
           items: [
-            // 后续新增博客文章后，在这里添加链接即可
-            // 比如 { text: '2026 CLI AI 工具推荐', link: '/blog/2026-ai-cli-tools' }
+            { text: 'Docker 容器部署个人服务最佳实践', link: '/articles/docker-deploy/' },
+            { text: '轻量级代码仓库 Gitea 本地搭建教程', link: '/articles/gitea/' },
+            { text: 'Linux 常用高效运维命令合集', link: '/articles/linux-commands/' }
           ]
         }
       ]

@@ -8,6 +8,7 @@ import DocNav from './components/DocNav.vue'
 import BgmPlayer from './components/BgmPlayer.vue'
 import HomePage from './components/HomePage.vue'
 import HomeLayout from './layouts/home.vue'
+import ArticlesList from './components/ArticlesList.vue'
 import './style.css'
 
 export default {
@@ -20,6 +21,7 @@ export default {
     app.component('DocNav', DocNav)
     app.component('BgmPlayer', BgmPlayer)
     app.component('HomePage', HomePage)
+    app.component('ArticlesList', ArticlesList)
   },
   layouts: {
     home: HomeLayout

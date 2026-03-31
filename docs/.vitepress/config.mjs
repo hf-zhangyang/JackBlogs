@@ -27,7 +27,7 @@ export default defineConfig({
     // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
-      { text: '博客文章', link: '/articles/' },
+      { text: '博客', link: '/articles/' },
       { text: '关于我', link: '/about' }
     ],
 

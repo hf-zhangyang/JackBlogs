@@ -1,24 +1,255 @@
 :root {
-  --vp-c-brand: #3b82f6;
-  --vp-c-brand-light: #60a5fa;
+  --vp-c-brand: #8b5cf6;
+  --vp-c-brand-light: #a78bfa;
+  --vp-c-brand-next: #c4b5fd;
   --vp-c-bg: #f8fafc;
-  --vp-c-bg-soft: #fff;
+  --vp-c-bg-soft: #ffffff;
+  --vp-c-bg-soft-up: #f1f5f9;
+  --vp-c-text-1: #1e293b;
+  --vp-c-text-2: #475569;
+  --vp-c-text-3: #64748b;
+  --vp-c-divider: rgba(139, 92, 246, 0.15);
+  --vp-c-border: rgba(139, 92, 246, 0.2);
 }
 
-.VPHome {
-  --vp-home-hero-name-color: #1e293b !important;
-  --vp-home-hero-text-color: #334155 !important;
+/* 强制隐藏主题切换按钮 */
+.VPSwitchAppearance,
+.VPNavBar .VPSwitchAppearance,
+.VPNavBarAppearance,
+.VPNavBar .VPNavBarAppearance,
+button.VPSwitchAppearance {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
+/* 隐藏导航栏分隔线（竖线） */
+.VPNavBar .VPNavBarDivider,
+.VPNavBar .divider,
+.VPNavBar .VPNavBarMenuLink::before,
+.VPNavBar .VPNavBarMenuLink::after,
+.VPNavBarExtra .VPNavBarDivider,
+.VPNavBarExtra .divider,
+.VPNavBar .container .divider,
+.VPNavBar .content .divider {
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 柔和浅色主题 */
+:root {
+  color-scheme: light;
+}
+
+/* 导航栏浅色背景 */
 .VPNavBar {
-  background: #fff !important;
-  border-bottom: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2) !important;
 }
 
-.VPNavBarTitle .title {
-  font-weight: 600 !important;
+/* 统一导航栏所有文字颜色 */
+.VPNavBar .VPNavBarTitle .title,
+.VPNavBar .VPNavBarMenuLink,
+.VPNavBar .VPNavBarMenuGroup .item,
+.VPNavBar .VPNavBarExtra .VPNavBarMenuLink,
+.VPNavBar .DocSearch-Button,
+.VPNavBar .VPSwitchAppearance,
+.VPNavBar .VPSocialLink,
+.VPNavBar .VPNavBarHamburger {
+  color: #1e293b !important;
 }
 
-.dark .VPNavBar {
-  background: #0f172a !important;
+.VPNavBar .VPNavBarTitle .title:hover,
+.VPNavBar .VPNavBarMenuLink:hover,
+.VPNavBar .VPNavBarMenuGroup .item:hover,
+.VPNavBar .VPNavBarExtra .VPNavBarMenuLink:hover {
+  color: #8b5cf6 !important;
+}
+
+.VPNavBar .VPNavBarMenuLink.active {
+  color: #8b5cf6 !important;
+  border-bottom: 2px solid #8b5cf6;
+}
+
+.VPNavBar .DocSearch-Button:hover,
+.VPNavBar .VPSocialLink:hover {
+  color: #8b5cf6 !important;
+}
+
+/* 搜索框背景 */
+.VPNavBar .DocSearch-Button {
+  background: rgba(139, 92, 246, 0.08) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.VPNavBar .DocSearch-Button:hover {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+/* 社交链接 */
+.VPNavBar .VPSocialLink {
+  color: #1e293b !important;
+}
+
+.VPNavBar .VPSocialLink .icon {
+  fill: currentColor;
+  width: 20px;
+  height: 20px;
+}
+
+.VPNavBar .VPSocialLink:hover {
+  color: #8b5cf6 !important;
+}
+
+.VPNavBar .VPSocialLink:hover .icon {
+  fill: #8b5cf6;
+}
+
+/* 导航栏标题加粗 */
+.VPNavBar .VPNavBarTitle .title {
+  font-weight: 700 !important;
+}
+
+/* 侧边栏 */
+.VPSidebar {
+  background: #ffffff !important;
+  border-right: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.VPSidebarItem .item {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.5 !important;
+}
+
+.VPSidebarItem level-1 > .item {
+  color: #1e293b !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.VPSidebarItem level-2 > .item {
+  color: #475569 !important;
+  padding: 0.4rem 1rem 0.4rem 1.5rem !important;
+}
+
+.VPSidebarItem .item:hover,
+.VPSidebarItem .item.active {
+  color: #8b5cf6 !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* 页脚 */
+.VPFooter {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  color: #64748b !important;
+}
+
+/* 跳过链接 */
+.VPSkipLink {
+  background: #8b5cf6 !important;
+  color: #ffffff !important;
+}
+
+/* 局部导航 */
+.VPLocalNav {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+.VPLocalNavOutlineDropdown button {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+.VPLocalNavOutlineDropdown button:hover {
+  color: #8b5cf6 !important;
+}
+
+/* 局部导航标题 */
+.VPLocalNav .title {
+  color: #1e293b !important;
+}
+
+.VPLocalNav .title:hover {
+  color: #8b5cf6 !important;
+}
+
+/* 文档大纲 */
+.VPDocAsideOutline {
+  background: transparent !important;
+}
+
+.VPDocOutlineItem .outline-link {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+.VPDocOutlineItem .outline-link:hover,
+.VPDocOutlineItem .outline-link.active {
+  color: #8b5cf6 !important;
+}
+
+/* 分隔线 */
+.divider-line {
+  background: rgba(139, 92, 246, 0.2) !important;
+}
+
+/* 下拉菜单 */
+.VPFlyout .menu {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+.VPMenu .item {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+.VPMenu .item:hover {
+  background: rgba(139, 92, 246, 0.1) !important;
+  color: #8b5cf6 !important;
+}
+
+/* body 背景 */
+body {
+  background: #f8fafc !important;
+}
+
+.VPContent {
+  background: transparent !important;
+}
+
+/* 首页全宽样式 */
+.VPDoc:has(.home-page) {
+  background: #f8fafc !important;
+}
+
+.VPDoc:has(.home-page) .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.VPDoc:has(.home-page) .content {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.VPDoc:has(.home-page) .vp-doc {
+  max-width: 100% !important;
+  padding: 0 !important;
 }

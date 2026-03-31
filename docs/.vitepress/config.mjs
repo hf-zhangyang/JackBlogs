@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { articleList, generateSidebar } from '../articles/articles.js'
 
 // 🔴 关键配置：GitHub Pages 路径必须是 /仓库名/
 const repoName = '/my-tech-blog/' // 对应仓库 https://github.com/hf-zhangyang/my-tech-blog
@@ -16,46 +17,22 @@ export default defineConfig({
   // 显示最后更新时间
   lastUpdated: true,
 
+  // 公共资源目录
+  publicDir: 'public',
+
   themeConfig: {
+    // 文章列表配置（供首页内容导航使用）
+    articleList: articleList,
+
     // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
-      { text: '技术指南', link: '/guide/intro' },
       { text: '博客文章', link: '/articles/' },
       { text: '关于我', link: '/about' }
     ],
 
-    // 侧边栏配置（按目录分组）
-    sidebar: {
-      '/guide/': [
-        {
-          text: '入门指南',
-          items: [
-            { text: '介绍', link: '/guide/intro' },
-            { text: '环境搭建', link: '/guide/env' },
-          ]
-        },
-        {
-          text: '开发技巧',
-          items: [
-            { text: 'VS Code 配置', link: '/guide/vscode' },
-            { text: 'Git 常用命令', link: '/guide/git' },
-          ]
-        }
-      ],
-      '/articles/': [
-        {
-          text: '技术博客',
-          collapsible: true,
-          collapsed: false,
-          items: [
-            { text: 'Docker 容器部署个人服务最佳实践', link: '/articles/docker-deploy/' },
-            { text: '轻量级代码仓库 Gitea 本地搭建教程', link: '/articles/gitea/' },
-            { text: 'Linux 常用高效运维命令合集', link: '/articles/linux-commands/' }
-          ]
-        }
-      ]
-    },
+    // 侧边栏配置（自动从文章列表生成）
+    sidebar: generateSidebar(),
 
     // 社交链接（GitHub 图标）
     socialLinks: [
@@ -74,11 +51,16 @@ export default defineConfig({
     },
 
     // 主题配置
-    appearance: true, // 开启明暗模式切换
+    appearance: false, // 关闭明暗模式切换
     lastUpdatedText: '更新于',
     docFooter: {
       prev: '上一篇',
       next: '下一篇'
+    },
+    // 页面右侧目录配置
+    outline: {
+      label: '目录',
+      level: [2, 3]
     }
   }
 })

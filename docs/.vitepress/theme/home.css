@@ -1,0 +1,14 @@
+/* 全局样式 - 首页全宽背景 */
+.VPDoc.has-aside .content-container {
+  max-width: 100% !important;
+}
+
+.vp-doc {
+  max-width: 100% !important;
+  padding: 2rem !important;
+}
+
+/* 首页特殊样式 */
+.layout {
+  max-width: 100% !important;
+}

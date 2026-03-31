@@ -25,39 +25,50 @@ const fullLink = computed(() => {
 
 <style scoped>
 .card {
-  background: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  border: 1px solid var(--vp-c-border);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(139, 92, 246, 0.35);
 }
+
 .title {
-  font-size: 1.2rem;
-  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
+
 .title a {
-  color: var(--vp-c-brand-1);
+  color: #8b5cf6;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.2s;
 }
+
 .title a:hover {
-  color: var(--vp-c-brand-2);
+  color: #a78bfa;
   text-decoration: underline;
 }
+
 .meta {
-  font-size: 0.85rem;
-  color: var(--vp-c-text-2);
-  margin-bottom: 0.6rem;
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
+
 .desc {
-  font-size: 0.95rem;
-  color: var(--vp-c-text-1);
+  font-size: 0.875rem;
+  color: #64748b;
   line-height: 1.6;
 }
 </style>

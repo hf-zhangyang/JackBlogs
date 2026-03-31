@@ -4,8 +4,11 @@ import { articleList, generateSidebar } from '../articles/articles.js'
 // 🔴 关键配置：GitHub Pages 路径必须是 /仓库名/
 const repoName = '/JackBlogs/' // 对应仓库 https://github.com/hf-zhangyang/JackBlogs
 
+// 根据环境变量判断是否为生产环境
+const isProduction = process.env.NODE_ENV === 'production' || process.env.CI === 'true'
+
 // 本地开发使用根路径，生产环境使用仓库名路径
-const base = process.env.NODE_ENV === 'production' ? repoName : '/'
+const base = isProduction ? repoName : '/'
 
 export default defineConfig({
   // 网站基础路径（GitHub Pages 必须配置，否则样式会错乱）

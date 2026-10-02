@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vitepress dev docs --base /",
     "build": "vitepress build docs",
-    "preview": "vitepress preview docs --base /"
+    "preview": "vitepress preview docs --base /",
+    "publish": "node tools/publish.mjs"
   },
   "repository": {
     "type": "git",

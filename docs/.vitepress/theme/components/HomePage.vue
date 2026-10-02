@@ -1,17 +1,17 @@
 <template>
   <div class="home-page">
-    <!-- 左侧个人资料 -->
+    <!-- 左侧栏：作者信息 -->
     <aside class="left-sidebar">
       <ProfileCard />
     </aside>
 
-    <!-- 中间内容区 -->
+    <!-- 主内容区 -->
     <main class="main-content">
       <HeroSection />
       <HomeArticleList />
     </main>
 
-    <!-- 右侧内容导航 -->
+    <!-- 右侧栏：目录 -->
     <aside class="right-sidebar">
       <DocNav />
     </aside>
@@ -30,15 +30,21 @@ import DocNav from './DocNav.vue'
   min-height: 100vh;
   background: var(--paper);
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) 260px;
-  gap: 2.5rem;
-  padding: 2.5rem 4rem;
+  grid-template-columns: 240px minmax(0, 1fr) 260px;
+  gap: 3.5rem;
+  padding: 3.5rem 4rem 4rem;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
 }
 
-.left-sidebar {
+.left-sidebar,
+.right-sidebar {
+  padding-top: 1rem;
+}
+
+.left-sidebar > *,
+.right-sidebar > * {
   position: sticky;
   top: 5rem;
   height: fit-content;
@@ -48,28 +54,22 @@ import DocNav from './DocNav.vue'
   min-width: 0;
 }
 
-.right-sidebar {
-  position: sticky;
-  top: 5rem;
-  height: fit-content;
-}
-
 @media (max-width: 1200px) {
   .home-page {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 1.5rem 2rem;
+    gap: 3rem;
+    padding: 2rem 2rem 3rem;
   }
 
-  .left-sidebar,
-  .right-sidebar {
+  .left-sidebar > *,
+  .right-sidebar > * {
     position: static;
   }
 }
 
 @media (max-width: 640px) {
   .home-page {
-    padding: 1rem;
+    padding: 1.25rem 1rem 2rem;
   }
 }
 </style>

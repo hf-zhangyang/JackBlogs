@@ -13,6 +13,16 @@ export const articleList = [
             title: "Docker 部署最佳实践",
             link: "/articles/docker/deploy",
             desc: "基础镜像优化、数据持久化与编排"
+          },
+          {
+            title: "示例文章：Docker Compose 多服务编排",
+            link: "/articles/容器与运维/示例文章-muqfbyqn",
+            desc: "使用 Docker Compose 编排多个容器服务的实战经验"
+          },
+          {
+            title: "示例文章：Docker Compose 多服务编排",
+            link: "/articles/容器与运维/示例文章-muqfd9tx",
+            desc: "使用 Docker Compose 编排多个容器服务的实战经验"
           }
         ]
       }

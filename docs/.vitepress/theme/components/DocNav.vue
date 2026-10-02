@@ -113,15 +113,16 @@ const getFullLink = (link) => withBase(link)
 
 .nav-title-text {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--ink);
   font-family: var(--font-serif);
+  letter-spacing: 0.12em;
 }
 
 .nav-title-en {
   font-size: 0.65rem;
   color: var(--ink-faint);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
@@ -155,6 +156,7 @@ const getFullLink = (link) => withBase(link)
   color: var(--cinnabar);
 }
 
+.category-link:hover,
 .category-link.active {
   color: var(--cinnabar);
   background: var(--cinnabar-soft);
@@ -229,6 +231,7 @@ const getFullLink = (link) => withBase(link)
   color: var(--cinnabar);
 }
 
+.subcategory-link:hover,
 .subcategory-link.active {
   color: var(--cinnabar);
 }

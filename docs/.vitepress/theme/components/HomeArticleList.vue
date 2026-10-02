@@ -90,7 +90,7 @@ const articles = [
 
 .title-ink {
   font-size: 1.3rem;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--ink);
   font-family: var(--font-serif);
   letter-spacing: 0.05em;
@@ -111,6 +111,35 @@ const articles = [
   border-radius: 2px;
 }
 
+.section-title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+}
+
+.title-ink {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  letter-spacing: 0.12em;
+}
+
+.title-en {
+  font-size: 0.65rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-note {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.15em;
+}
+
+/* 行式列表 */
 .article-list {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
-/* 引入思源宋体 + 思源黑体 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+/* 引入思源宋体 + 思源黑体 + 马善政毛笔楷 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&family=Ma+Shan+Zheng&display=swap');
 
 /* ============================================
    现代文人书房 · Modern Literati Study
@@ -49,6 +49,7 @@
   /* 字体 */
   --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", serif;
   --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-brush: "Ma Shan Zheng", "STKaiti", "KaiTi", cursive;
 }
 
 /* 基础排版 */

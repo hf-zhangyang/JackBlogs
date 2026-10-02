@@ -90,6 +90,7 @@
   border-radius: 50%;
   border: 2px solid var(--paper-card);
   box-shadow: 0 2px 8px rgba(185, 28, 28, 0.4);
+  transform: rotate(-6deg);
 }
 
 .profile-title {

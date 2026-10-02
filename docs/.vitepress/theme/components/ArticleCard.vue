@@ -15,9 +15,7 @@ import { computed } from 'vue'
 const props = defineProps(['title', 'date', 'desc', 'link'])
 const { site } = useData()
 
-// 自动拼接 base 路径，支持 GitHub Pages 部署
 const fullLink = computed(() => {
-  // 移除 link 开头的斜杠，避免重复
   const cleanLink = props.link.replace(/^\//, '')
   return `${site.value.base}${cleanLink}`
 })
@@ -25,50 +23,48 @@ const fullLink = computed(() => {
 
 <style scoped>
 .card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  background: var(--paper-card);
+  border-radius: 6px;
   padding: 1.25rem;
   margin-bottom: 1rem;
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  border: 1px solid var(--line);
   transition: all 0.3s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.05);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(139, 92, 246, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(28, 25, 23, 0.1);
+  border-color: var(--cinnabar);
 }
 
 .title {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  font-family: var(--font-serif);
 }
 
 .title a {
-  color: #8b5cf6;
+  color: var(--ink);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
 }
 
 .title a:hover {
-  color: #a78bfa;
-  text-decoration: underline;
+  color: var(--cinnabar);
 }
 
 .meta {
   font-size: 0.8125rem;
-  color: #94a3b8;
+  color: var(--ink-faint);
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-family: monospace;
 }
 
 .desc {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--ink-muted);
   line-height: 1.6;
 }
 </style>

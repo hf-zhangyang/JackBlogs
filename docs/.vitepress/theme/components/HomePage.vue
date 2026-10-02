@@ -28,17 +28,19 @@ import DocNav from './DocNav.vue'
 <style scoped>
 .home-page {
   min-height: 100vh;
-  background: #f8fafc;
+  background: var(--paper);
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr) 280px;
-  gap: 3rem;
-  padding: 4rem 6rem;
+  grid-template-columns: 260px minmax(0, 1fr) 260px;
+  gap: 2.5rem;
+  padding: 2.5rem 4rem;
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .left-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 5rem;
   height: fit-content;
 }
 
@@ -48,7 +50,7 @@ import DocNav from './DocNav.vue'
 
 .right-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 5rem;
   height: fit-content;
 }
 
@@ -56,11 +58,18 @@ import DocNav from './DocNav.vue'
   .home-page {
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding: 1.5rem 2rem;
   }
 
   .left-sidebar,
   .right-sidebar {
     position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page {
+    padding: 1rem;
   }
 }
 </style>

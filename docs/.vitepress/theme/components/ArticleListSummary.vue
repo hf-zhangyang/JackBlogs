@@ -17,8 +17,6 @@
 import { useData } from 'vitepress'
 
 const { theme } = useData()
-
-// 从配置中读取文章列表
 const articleList = theme.value.articleList || []
 </script>
 
@@ -38,14 +36,15 @@ const articleList = theme.value.articleList || []
 .category-item h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--ink);
   margin-bottom: 0.5rem;
   text-align: center !important;
+  font-family: var(--font-serif);
 }
 
 .category-item p {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--ink-muted);
   line-height: 1.6;
   margin: 0 0 0.75rem 0;
   text-align: center !important;
@@ -63,19 +62,19 @@ const articleList = theme.value.articleList || []
   align-items: center;
   gap: 0.25rem;
   padding: 0.35rem 0.75rem;
-  background: rgba(139, 92, 246, 0.08);
-  border: 1px solid rgba(139, 92, 246, 0.15);
-  border-radius: 6px;
+  background: var(--cinnabar-soft);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
   font-size: 0.875rem;
 }
 
 .subcategory-name {
-  color: #475569;
+  color: var(--ink-soft);
   font-weight: 500;
 }
 
 .subcategory-count {
-  color: #8b5cf6;
+  color: var(--cinnabar);
   font-size: 0.75rem;
 }
 </style>

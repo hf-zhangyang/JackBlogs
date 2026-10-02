@@ -42,8 +42,6 @@
 import { useData } from 'vitepress'
 
 const { site } = useData()
-
-// 从配置中读取文章列表
 const articleList = site.value.articleList || []
 
 const getFullLink = (link) => {
@@ -55,37 +53,35 @@ const getFullLink = (link) => {
 <style scoped>
 .articles-layout {
   min-height: 100vh;
-  background: #f8fafc;
+  background: var(--paper);
   display: grid;
-  grid-template-columns: 200px 1fr !important;
+  grid-template-columns: 200px 1fr;
   gap: 1.5rem;
   padding: 1.5rem 2rem 2rem 2rem;
 }
 
 .left-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 5rem;
   height: fit-content;
-  width: 200px !important;
-  flex-shrink: 0;
 }
 
 .category-nav {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  background: var(--paper-card);
+  border-radius: 6px;
   padding: 1.25rem;
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06);
 }
 
 .nav-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--ink);
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid rgba(139, 92, 246, 0.25);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-serif);
 }
 
 .nav-list {
@@ -103,17 +99,17 @@ const getFullLink = (link) => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.625rem 0.875rem;
-  color: #475569;
+  color: var(--ink-soft);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: all 0.2s;
   font-size: 0.9rem;
 }
 
 .nav-list a:hover {
-  background: rgba(139, 92, 246, 0.1);
-  color: #8b5cf6;
-  transform: translateX(4px);
+  background: var(--cinnabar-soft);
+  color: var(--cinnabar);
+  transform: translateX(3px);
 }
 
 .nav-icon {
@@ -126,25 +122,25 @@ const getFullLink = (link) => {
 }
 
 .content-wrapper {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  background: var(--paper-card);
+  border-radius: 6px;
   padding: 2rem;
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06);
 }
 
 .page-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--ink);
   margin-bottom: 0.75rem;
   text-align: center;
+  font-family: var(--font-serif);
 }
 
 .welcome-text {
   text-align: center;
-  color: #64748b;
+  color: var(--ink-muted);
   font-size: 1rem;
   margin-bottom: 2rem;
   line-height: 1.6;
@@ -153,9 +149,9 @@ const getFullLink = (link) => {
 .category-section {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  border: 1px solid rgba(139, 92, 246, 0.1);
+  background: var(--paper-soft);
+  border-radius: 6px;
+  border: 1px solid var(--line-soft);
 }
 
 .category-section:last-child {
@@ -165,12 +161,13 @@ const getFullLink = (link) => {
 .category-section h2 {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--ink);
   margin-bottom: 0.5rem;
+  font-family: var(--font-serif);
 }
 
 .category-desc {
-  color: #64748b;
+  color: var(--ink-muted);
   font-size: 0.9rem;
   margin-bottom: 1rem;
   line-height: 1.6;
@@ -185,38 +182,41 @@ const getFullLink = (link) => {
 .article-link {
   display: block;
   padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.15);
-  border-radius: 8px;
+  background: var(--paper-card);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
   text-decoration: none;
   transition: all 0.2s;
 }
 
 .article-link:hover {
-  background: rgba(139, 92, 246, 0.08);
-  border-color: rgba(139, 92, 246, 0.3);
-  transform: translateX(4px);
+  border-left: 3px solid var(--cinnabar);
+  border-color: var(--line);
+  transform: translateX(3px);
 }
 
 .article-title {
   display: block;
   font-size: 1rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--ink);
   margin-bottom: 0.25rem;
+}
+
+.article-link:hover .article-title {
+  color: var(--cinnabar);
 }
 
 .article-desc {
   display: block;
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--ink-muted);
 }
 
 @media (max-width: 1024px) {
   .articles-layout {
     grid-template-columns: 1fr;
   }
-
   .left-sidebar {
     position: static;
   }
@@ -226,7 +226,6 @@ const getFullLink = (link) => {
   .articles-layout {
     padding: 1rem;
   }
-
   .content-wrapper {
     padding: 1.5rem;
   }

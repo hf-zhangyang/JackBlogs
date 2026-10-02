@@ -40,8 +40,8 @@ export default defineConfig({
 
     // 页脚信息
     footer: {
-      message: '基于 VitePress 构建',
-      copyright: 'Copyright © 2026 我的技术博客'
+      message: '偷得浮生半日闲 · 记录技术与生活',
+      copyright: '© 2026 我的技术博客 · 保留所有权利'
     },
 
     // 本地搜索配置（自带全文搜索）

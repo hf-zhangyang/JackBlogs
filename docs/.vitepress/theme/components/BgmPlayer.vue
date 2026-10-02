@@ -52,7 +52,6 @@ const syncState = () => {
 }
 
 onMounted(() => {
-  // 只在客户端创建全局音频元素
   if (typeof window !== 'undefined' && !window.__bgm_audio__) {
     window.__bgm_audio__ = new Audio('/audio/高山流水 - 纯音乐网.mp3')
     window.__bgm_audio__.loop = true
@@ -60,13 +59,10 @@ onMounted(() => {
   }
 
   audio.value = window.__bgm_audio__
-
-  // 同步播放状态
   audio.value.addEventListener('play', syncState)
   audio.value.addEventListener('pause', syncState)
   syncState()
 
-  // 尝试自动播放
   const playPromise = audio.value.play()
   if (playPromise !== undefined) {
     playPromise.then(() => {
@@ -100,31 +96,27 @@ onUnmounted(() => {
   gap: 0.75rem;
 }
 
-/* 播放按钮 */
 .play-btn {
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+  background: var(--paper-card);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(139, 92, 246, 0.3);
-  box-shadow:
-    0 4px 16px rgba(139, 92, 246, 0.4);
+  border: 2px solid var(--cinnabar);
+  box-shadow: 0 4px 16px rgba(185, 28, 28, 0.25);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
 }
 
 .play-btn:hover {
+  background: var(--cinnabar);
   transform: scale(1.1);
-  box-shadow:
-    0 6px 24px rgba(139, 92, 246, 0.6),
-    0 0 0 4px rgba(139, 92, 246, 0.2);
-  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 6px 24px rgba(185, 28, 28, 0.45);
 }
 
 .play-btn:active {
@@ -134,12 +126,12 @@ onUnmounted(() => {
 .icon {
   width: 16px;
   height: 16px;
-  color: white;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  color: var(--cinnabar);
   transition: all 0.3s ease;
 }
 
 .play-btn:hover .icon {
+  color: var(--paper-card);
   transform: scale(1.1);
 }
 
@@ -149,25 +141,24 @@ onUnmounted(() => {
   align-items: center;
   gap: 3px;
   padding: 0.5rem 0.75rem;
-  background: rgba(139, 92, 246, 0.15);
+  background: var(--paper-card);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.08);
 }
 
 .wave {
   width: 3px;
   height: 12px;
-  background: linear-gradient(to top, #8b5cf6, #a78bfa);
+  background: linear-gradient(to top, var(--cinnabar), var(--cinnabar-light));
   border-radius: 2px;
   animation: wave 1.2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
 }
 
 @keyframes wave {
   0%, 100% {
-    height: 12px;
+    height: 10px;
     opacity: 0.6;
   }
   50% {
@@ -179,32 +170,31 @@ onUnmounted(() => {
 /* 提示文字 */
 .tooltip {
   position: absolute;
-  right: 70px;
+  right: 72px;
   top: 50%;
   transform: translateY(-50%);
-  padding: 0.5rem 1rem;
-  background: rgba(139, 92, 246, 0.95);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 0.875rem;
+  padding: 0.4rem 0.875rem;
+  background: var(--ink);
+  color: var(--paper-card);
+  font-size: 0.8rem;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 4px;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(28, 25, 23, 0.25);
   pointer-events: none;
 }
 
 .tooltip::after {
   content: '';
   position: absolute;
-  right: -6px;
+  right: -5px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 6px solid rgba(139, 92, 246, 0.95);
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
+  border-left: 5px solid var(--ink);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -213,5 +203,12 @@ onUnmounted(() => {
 
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .bgm-player {
+    bottom: 1rem;
+    right: 1rem;
+  }
 }
 </style>

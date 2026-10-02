@@ -3,11 +3,14 @@
     <!-- 左侧栏 - 分类导航 -->
     <aside class="left-sidebar">
       <div class="category-nav">
-        <h3 class="nav-title">📚 分类</h3>
+        <h3 class="nav-title">
+          <span class="nav-title-text">分类</span>
+          <span class="nav-title-en">Categories</span>
+        </h3>
         <ul class="nav-list">
           <li v-for="category in articleList" :key="category.category">
             <a :href="'#' + category.category" @click.prevent="scrollToCategory(category.category)">
-              <span class="nav-icon">{{ category.icon }}</span>
+              <span class="nav-icon"></span>
               {{ category.category }}
             </a>
           </li>
@@ -18,19 +21,38 @@
     <!-- 右侧内容区 -->
     <main class="main-content">
       <div class="content-wrapper">
-        <h1 class="page-title">📚 技术博客</h1>
-        <p class="welcome-text">欢迎来到我的技术博客！这里记录了我在后端开发、容器化、运维和架构方面的实践心得。</p>
+        <header class="page-header">
+          <h1 class="page-title">技术博客</h1>
+          <p class="welcome-text">
+            记录后端开发、容器化、运维和架构方面的实践心得
+          </p>
+          <div class="header-deco"></div>
+        </header>
 
-        <div v-for="category in articleList" :key="category.category" :id="category.category" class="category-section">
-          <h2>{{ category.icon }} {{ category.category }}</h2>
-          <p class="category-desc">{{ category.description }}</p>
+        <div
+          v-for="category in articleList"
+          :key="category.category"
+          :id="category.category"
+          class="category-section"
+        >
+          <div class="category-header">
+            <h2>
+              <span class="cat-icon"></span>
+              {{ category.category }}
+            </h2>
+            <p class="category-desc">{{ category.description }}</p>
+          </div>
 
           <!-- 遍历子分类 -->
-          <div v-for="subcategory in category.subcategories" :key="subcategory.name" class="subcategory-section">
+          <div
+            v-for="subcategory in category.subcategories"
+            :key="subcategory.name"
+            class="subcategory-section"
+          >
             <h3 class="subcategory-title">
-              <span class="book-icon">📖</span>
+              <span class="book-dot"></span>
               {{ subcategory.name }}
-              <span class="article-count">({{ subcategory.items.length }})</span>
+              <span class="article-count">{{ subcategory.items.length }} 篇</span>
             </h3>
             <div class="article-links">
               <a
@@ -39,8 +61,11 @@
                 :href="getFullLink(article.link)"
                 class="article-link"
               >
-                <span class="article-title">{{ article.title }}</span>
-                <span class="article-desc">{{ article.desc }}</span>
+                <span class="link-arrow">›</span>
+                <div class="link-body">
+                  <span class="article-title">{{ article.title }}</span>
+                  <span class="article-desc">{{ article.desc }}</span>
+                </div>
               </a>
             </div>
           </div>
@@ -69,35 +94,50 @@ const scrollToCategory = (categoryId) => {
 <style scoped>
 .articles-page {
   min-height: 100vh;
-  background: #f8fafc;
+  background: var(--paper);
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 1.5rem;
   padding: 2rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .left-sidebar {
   position: sticky;
-  top: 2rem;
+  top: 5rem;
   height: fit-content;
 }
 
 .category-nav {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  background: var(--paper-card);
+  border-radius: 6px;
   padding: 1.25rem;
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06);
 }
 
 .nav-title {
-  font-size: 1.3rem;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.nav-title-text {
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid rgba(139, 92, 246, 0.25);
+  color: var(--ink);
+  font-family: var(--font-serif);
+}
+
+.nav-title-en {
+  font-size: 0.65rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
 .nav-list {
@@ -107,31 +147,39 @@ const scrollToCategory = (categoryId) => {
 }
 
 .nav-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .nav-list a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 0.875rem;
-  color: #475569;
+  padding: 0.5rem 0.75rem;
+  color: var(--ink-soft);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: all 0.2s;
   font-size: 0.9rem;
   cursor: pointer;
 }
 
 .nav-list a:hover {
-  background: rgba(139, 92, 246, 0.1);
-  color: #8b5cf6;
-  transform: translateX(4px);
+  background: var(--cinnabar-soft);
+  color: var(--cinnabar);
+  transform: translateX(3px);
 }
 
 .nav-icon {
-  font-size: 1.1rem;
+  width: 4px;
+  height: 0.9rem;
+  background: var(--cinnabar);
+  border-radius: 1px;
   flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.nav-list a:hover .nav-icon {
+  background: var(--jade);
 }
 
 .main-content {
@@ -139,109 +187,170 @@ const scrollToCategory = (categoryId) => {
 }
 
 .content-wrapper {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: 2rem;
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  background: var(--paper-card);
+  border-radius: 6px;
+  padding: 2.5rem;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
 .page-title {
   font-size: 2rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-  text-align: center;
+  font-weight: 900;
+  color: var(--ink);
+  margin: 0 0 0.5rem 0;
+  font-family: var(--font-serif);
+  letter-spacing: 0.05em;
 }
 
 .welcome-text {
-  text-align: center;
-  color: #64748b;
-  font-size: 1rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.header-deco {
+  width: 64px;
+  height: 3px;
+  background: var(--cinnabar);
+  margin: 1rem auto 0;
+  border-radius: 2px;
 }
 
 .category-section {
   margin-bottom: 2.5rem;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: 5rem;
 }
 
-.category-section h2 {
-  font-size: 1.5rem;
+.category-section:last-child {
+  margin-bottom: 0;
+}
+
+.category-header {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.category-header h2 {
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+  color: var(--ink);
+  margin: 0 0 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+}
+
+.cat-icon {
+  width: 5px;
+  height: 1.3rem;
+  background: var(--cinnabar);
+  border-radius: 1px;
+  flex-shrink: 0;
 }
 
 .category-desc {
-  color: #64748b;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin: 0;
   line-height: 1.6;
 }
 
 .subcategory-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .subcategory-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 1rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.875rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.book-icon {
-  font-size: 1.2rem;
+.book-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cinnabar);
 }
 
 .article-count {
-  font-size: 0.85rem;
-  color: #8b5cf6;
-  font-weight: 600;
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  font-weight: 400;
 }
 
 .article-links {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .article-link {
-  display: block;
-  padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.15);
-  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: var(--paper-soft);
+  border: 1px solid var(--line-soft);
+  border-radius: 4px;
   text-decoration: none;
   transition: all 0.2s;
 }
 
 .article-link:hover {
-  background: rgba(139, 92, 246, 0.08);
-  border-color: rgba(139, 92, 246, 0.3);
+  background: var(--paper-card);
+  border-color: var(--line);
   transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.06);
+}
+
+.link-arrow {
+  color: var(--ink-faint);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  transition: color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.article-link:hover .link-arrow {
+  color: var(--cinnabar);
+  transform: translateX(2px);
+}
+
+.link-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .article-title {
   display: block;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+}
+
+.article-link:hover .article-title {
+  color: var(--cinnabar);
 }
 
 .article-desc {
   display: block;
-  font-size: 0.9rem;
-  color: #64748b;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
   line-height: 1.5;
 }
 
@@ -249,7 +358,6 @@ const scrollToCategory = (categoryId) => {
   .articles-page {
     grid-template-columns: 1fr;
   }
-
   .left-sidebar {
     position: static;
   }
@@ -259,7 +367,6 @@ const scrollToCategory = (categoryId) => {
   .articles-page {
     padding: 1rem;
   }
-
   .content-wrapper {
     padding: 1.5rem;
   }

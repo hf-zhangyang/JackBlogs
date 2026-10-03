@@ -9,6 +9,7 @@ import BgmPlayer from './components/BgmPlayer.vue'
 import HomePage from './components/HomePage.vue'
 import HomeLayout from './layouts/home.vue'
 import ArticlesList from './components/ArticlesList.vue'
+import LegacyRedirect from './components/LegacyRedirect.vue'
 import './style.css'
 
 export default {
@@ -28,6 +29,8 @@ export default {
   },
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      // 旧文章链接的 404 兜底跳转（仅在 404 页生效）
+      'layout-top': () => h(LegacyRedirect),
       'layout-bottom': () => h(BgmPlayer)
     })
   }

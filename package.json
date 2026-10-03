@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress dev docs --base /",
-    "build": "vitepress build docs",
-    "preview": "vitepress preview docs --base /",
+    "sync": "node tools/sync-articles.mjs",
+    "test:legacy": "node tools/test-legacy-urls.mjs",
+    "dev": "npm run sync && vitepress dev docs",
+    "build": "npm run sync && vitepress build docs",
+    "preview": "vitepress preview docs",
     "publish": "node tools/publish.mjs"
   },
   "repository": {

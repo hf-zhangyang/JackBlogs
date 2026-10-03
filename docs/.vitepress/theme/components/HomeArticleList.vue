@@ -34,33 +34,26 @@
 
 <script setup>
 import { withBase } from 'vitepress'
+import { articleList } from '../../../articles/articles.js'
 
-const articles = [
-  {
-    title: 'Docker 容器部署个人服务最佳实践',
-    desc: '讲解 Docker 基础镜像优化、数据持久化、网络配置与多服务编排。',
-    date: '2026-03-30',
-    tag: '容器运维',
-    seal: '容',
-    link: '/articles/docker/deploy'
-  },
-  {
-    title: '轻量级代码仓库 Gitea 本地搭建教程',
-    desc: 'Docker 一键部署 Gitea，配置 HTTPS、反向代理与数据备份。',
-    date: '2026-03-28',
-    tag: '后端工具',
-    seal: '码',
-    link: '/articles/backend/gitea'
-  },
-  {
-    title: 'Linux 常用高效运维命令合集',
-    desc: '日常排查网络、磁盘、进程、日志高频命令，附带单行脚本。',
-    date: '2026-03-25',
-    tag: 'Linux',
-    seal: '令',
-    link: '/articles/linux/commands'
-  }
-]
+// 从文章索引中取最新若干篇（按 frontmatter date 倒序），避免此处再手工维护一份清单
+const MAX_ITEMS = 3
+
+const articles = articleList
+  .flatMap((category) =>
+    category.subcategories.flatMap((subcategory) =>
+      subcategory.items.map((item) => ({
+        title: item.title,
+        desc: item.desc,
+        date: item.date || '',
+        tag: subcategory.name,
+        seal: item.title.slice(0, 1),
+        link: item.link
+      }))
+    )
+  )
+  .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+  .slice(0, MAX_ITEMS)
 </script>
 
 <style scoped>

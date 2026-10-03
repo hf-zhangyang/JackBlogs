@@ -19,6 +19,12 @@ export default defineConfig({
   // 公共资源目录
   publicDir: 'public',
 
+  // 不参与页面生成的源文件（_meta.md 是目录分类的元数据，不是文章）
+  srcExclude: ['**/_meta.md', '**/README.md'],
+
+  // 关闭明暗模式切换（顶层配置项，不属于 themeConfig）
+  appearance: false,
+
   themeConfig: {
     // 文章列表配置（供首页内容导航使用）
     articleList: articleList,
@@ -49,8 +55,6 @@ export default defineConfig({
       provider: 'local'
     },
 
-    // 主题配置
-    appearance: false, // 关闭明暗模式切换
     lastUpdatedText: '更新于',
     docFooter: {
       prev: '上一篇',

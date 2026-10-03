@@ -1,31 +1,25 @@
-// 文章列表配置
+// 文章列表配置（⚠️ 本文件由 tools/sync-articles.mjs 自动生成，请勿手动编辑）
+// 内容来源：docs/articles/<分类目录>/<子分类目录>/*.md
+// 添加文章：把 .md 丢进对应目录（分类信息写在目录上），然后运行 npm run sync
 // 支持三级目录：分类 → 子分类 → 文章
+
 export const articleList = [
   {
     category: "容器与运维",
     icon: "📘",
     description: "Docker 容器化部署、镜像优化、网络配置与多服务编排。",
     subcategories: [
-      {
-        name: "Docker",
-        items: [
-          {
-            title: "Docker 部署最佳实践",
-            link: "/articles/docker/deploy",
-            desc: "基础镜像优化、数据持久化与编排"
-          },
-          {
-            title: "示例文章：Docker Compose 多服务编排",
-            link: "/articles/容器与运维/示例文章-muqfbyqn",
-            desc: "使用 Docker Compose 编排多个容器服务的实战经验"
-          },
-          {
-            title: "示例文章：Docker Compose 多服务编排",
-            link: "/articles/容器与运维/示例文章-muqfd9tx",
-            desc: "使用 Docker Compose 编排多个容器服务的实战经验"
-          }
-        ]
-      }
+    {
+      name: "Docker",
+      items: [
+        {
+          title: "Docker 容器部署个人服务最佳实践",
+          link: "/articles/container/docker/deploy",
+          desc: "基础镜像优化、数据持久化与编排",
+          date: "2026-03-30"
+        }
+      ]
+    }
     ]
   },
   {
@@ -33,16 +27,17 @@ export const articleList = [
     icon: "📗",
     description: "Linux 系统管理、常用命令、性能优化与故障排查。",
     subcategories: [
-      {
-        name: "基础命令",
-        items: [
-          {
-            title: "常用运维命令",
-            link: "/articles/linux/commands",
-            desc: "网络、磁盘、进程、日志排查命令"
-          }
-        ]
-      }
+    {
+      name: "基础命令",
+      items: [
+        {
+          title: "Linux 常用高效运维命令合集",
+          link: "/articles/linux/basic-commands/commands",
+          desc: "网络、磁盘、进程、日志排查命令",
+          date: "2026-03-25"
+        }
+      ]
+    }
     ]
   },
   {
@@ -50,26 +45,28 @@ export const articleList = [
     icon: "📙",
     description: "后端技术栈、微服务架构、开发工具与服务部署。",
     subcategories: [
-      {
-        name: "工具搭建",
-        items: [
-          {
-            title: "Gitea 代码仓库搭建",
-            link: "/articles/backend/gitea",
-            desc: "Docker 部署、HTTPS 配置与数据备份"
-          },
-          {
-            title: "Gitea 代码仓库搭建1",
-            link: "/articles/backend/gitea",
-            desc: "Docker 部署、HTTPS 配置与数据备份"
-          },
-          {
-            title: "Gitea 代码仓库搭建3",
-            link: "/articles/backend/gitea",
-            desc: "Docker 部署、HTTPS 配置与数据备份"
-          }
-        ]
-      }
+    {
+      name: "工具搭建",
+      items: [
+        {
+          title: "轻量级代码仓库 Gitea 本地搭建教程",
+          link: "/articles/backend/tools/gitea",
+          desc: "Docker 部署、HTTPS 配置与数据备份",
+          date: "2026-03-28"
+        }
+      ]
+    },
+    {
+      name: "设计模式",
+      items: [
+        {
+          title: "线程安全单例模式实现指南",
+          link: "/articles/backend/design-patterns/thread-safe-singleton",
+          desc: "Lazy<T>、lock 双重检查与 Interlocked 三种实现的代码、对比与选型建议",
+          date: "2026-10-03"
+        }
+      ]
+    }
     ]
   }
 ]

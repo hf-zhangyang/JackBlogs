@@ -1,3 +1,9 @@
+---
+title: 轻量级代码仓库 Gitea 本地搭建教程
+desc: Docker 部署、HTTPS 配置与数据备份
+date: 2026-03-28
+---
+
 # 轻量级代码仓库 Gitea 本地搭建教程
 
 ## 概述

@@ -1,0 +1,14 @@
+# 依赖
+node_modules/
+
+# 构建产物与缓存（CI 会自行构建，无需提交）
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# 本地智能体工作数据（含跨项目工作笔记，不宜进入公开仓库）
+.workbuddy/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.log

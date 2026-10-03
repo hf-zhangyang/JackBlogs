@@ -1,374 +1,220 @@
 <template>
   <div class="articles-page">
-    <!-- 左侧栏 - 分类导航 -->
-    <aside class="left-sidebar">
-      <div class="category-nav">
-        <h3 class="nav-title">
-          <span class="nav-title-text">分类</span>
-          <span class="nav-title-en">Categories</span>
-        </h3>
-        <ul class="nav-list">
-          <li v-for="category in articleList" :key="category.category">
-            <a :href="'#' + category.category" @click.prevent="scrollToCategory(category.category)">
-              <span class="nav-icon"></span>
-              {{ category.category }}
-            </a>
-          </li>
-        </ul>
+    <header class="page-header">
+      <h1>技术<em>笔记</em>全目录</h1>
+      <p class="welcome">
+        按分类归档 · 共 {{ totalArticles }} 篇文章 · {{ articleList.length }} 个分类
+      </p>
+    </header>
+
+    <section
+      v-for="category in articleList"
+      :key="category.category"
+      :id="category.category"
+      class="cat-section"
+    >
+      <div class="cat-header">
+        <h2>{{ category.category }}</h2>
+        <p class="cat-desc">{{ category.description }}</p>
       </div>
-    </aside>
 
-    <!-- 右侧内容区 -->
-    <main class="main-content">
-      <div class="content-wrapper">
-        <header class="page-header">
-          <h1 class="page-title">技术博客</h1>
-          <p class="welcome-text">
-            记录后端开发、容器化、运维和架构方面的实践心得
-          </p>
-          <div class="header-deco"></div>
-        </header>
-
-        <div
-          v-for="category in articleList"
-          :key="category.category"
-          :id="category.category"
-          class="category-section"
-        >
-          <div class="category-header">
-            <h2>
-              <span class="cat-icon"></span>
-              {{ category.category }}
-            </h2>
-            <p class="category-desc">{{ category.description }}</p>
-          </div>
-
-          <!-- 遍历子分类 -->
-          <div
-            v-for="subcategory in category.subcategories"
-            :key="subcategory.name"
-            class="subcategory-section"
+      <div
+        v-for="subcategory in category.subcategories"
+        :key="subcategory.name"
+        class="subcat-section"
+      >
+        <h3 class="subcat-title">
+          {{ subcategory.name }}
+          <span class="count">{{ subcategory.items.length }} 篇</span>
+        </h3>
+        <div class="post-list">
+          <a
+            v-for="article in subcategory.items"
+            :key="article.link"
+            :href="getFullLink(article.link)"
+            class="post-item"
           >
-            <h3 class="subcategory-title">
-              <span class="book-dot"></span>
-              {{ subcategory.name }}
-              <span class="article-count">{{ subcategory.items.length }} 篇</span>
-            </h3>
-            <div class="article-links">
-              <a
-                v-for="article in subcategory.items"
-                :key="article.link"
-                :href="getFullLink(article.link)"
-                class="article-link"
-              >
-                <span class="link-arrow">›</span>
-                <div class="link-body">
-                  <span class="article-title">{{ article.title }}</span>
-                  <span class="article-desc">{{ article.desc }}</span>
-                </div>
-              </a>
-            </div>
-          </div>
+            <span class="t">{{ article.title }}</span>
+            <span class="d">{{ article.desc }}</span>
+            <span class="m">{{ article.date }}</span>
+          </a>
         </div>
       </div>
-    </main>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { articleList } from '../../../articles/articles.js'
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import { articleList } from '../../../articles/articles.js'
 
-const getFullLink = (link) => {
-  return withBase(link.startsWith('/') ? link : `/${link}`)
-}
+const totalArticles = computed(() =>
+  articleList.reduce(
+    (sum, c) =>
+      sum + c.subcategories.reduce((s, sub) => s + sub.items.length, 0),
+    0
+  )
+)
 
-const scrollToCategory = (categoryId) => {
-  const element = document.getElementById(categoryId)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-}
+const getFullLink = (link) => withBase(link.startsWith('/') ? link : `/${link}`)
 </script>
 
 <style scoped>
 .articles-page {
-  min-height: 100vh;
-  background: var(--paper);
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 1.5rem;
-  padding: 2rem 3rem;
-  max-width: 1200px;
+  padding: 40px 48px 96px;
+  max-width: 1152px;
   margin: 0 auto;
 }
 
-.left-sidebar {
-  position: sticky;
-  top: 5rem;
-  height: fit-content;
-}
-
-.category-nav {
-  background: var(--paper-card);
-  border-radius: 6px;
-  padding: 1.25rem;
-  border: 1px solid var(--line);
-  box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06);
-}
-
-.nav-title {
-  margin: 0 0 0.75rem 0;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.nav-title-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--ink);
-  font-family: var(--font-serif);
-}
-
-.nav-title-en {
-  font-size: 0.65rem;
-  color: var(--ink-faint);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-list li {
-  margin-bottom: 0.25rem;
-}
-
-.nav-list a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  color: var(--ink-soft);
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.2s;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.nav-list a:hover {
-  background: var(--cinnabar-soft);
-  color: var(--cinnabar);
-  transform: translateX(3px);
-}
-
-.nav-icon {
-  width: 4px;
-  height: 0.9rem;
-  background: var(--cinnabar);
-  border-radius: 1px;
-  flex-shrink: 0;
-  transition: background 0.2s;
-}
-
-.nav-list a:hover .nav-icon {
-  background: var(--jade);
-}
-
-.main-content {
-  min-width: 0;
-}
-
-.content-wrapper {
-  background: var(--paper-card);
-  border-radius: 6px;
-  padding: 2.5rem;
-  border: 1px solid var(--line);
-  box-shadow: 0 2px 12px rgba(28, 25, 23, 0.06);
-}
-
 .page-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 40px;
 }
 
-.page-title {
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--ink);
-  margin: 0 0 0.5rem 0;
-  font-family: var(--font-serif);
-  letter-spacing: 0.05em;
+.page-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--ink-1);
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
+  border: none;
+  padding: 0;
 }
 
-.welcome-text {
-  color: var(--ink-muted);
-  font-size: 0.95rem;
+.page-header h1 em {
+  font-style: normal;
+  background: linear-gradient(120deg, #646cff 0%, #42b883 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.page-header .welcome {
+  font-size: 1rem;
+  color: var(--ink-3);
   margin: 0;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
-.header-deco {
-  width: 64px;
-  height: 3px;
-  background: var(--cinnabar);
-  margin: 1rem auto 0;
-  border-radius: 2px;
+.cat-section {
+  margin-bottom: 44px;
+  scroll-margin-top: 80px;
 }
 
-.category-section {
-  margin-bottom: 2.5rem;
-  scroll-margin-top: 5rem;
-}
-
-.category-section:last-child {
+.cat-section:last-child {
   margin-bottom: 0;
 }
 
-.category-header {
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--line-soft);
+.cat-header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
-.category-header h2 {
-  font-size: 1.35rem;
+.cat-header h2 {
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 0.4rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-serif);
-}
-
-.cat-icon {
-  width: 5px;
-  height: 1.3rem;
-  background: var(--cinnabar);
-  border-radius: 1px;
-  flex-shrink: 0;
-}
-
-.category-desc {
-  color: var(--ink-muted);
-  font-size: 0.9rem;
+  color: var(--ink-1);
   margin: 0;
-  line-height: 1.6;
+  letter-spacing: -0.02em;
+  border: none;
+  padding: 0;
 }
 
-.subcategory-section {
-  margin-bottom: 1.25rem;
+.cat-header .cat-desc {
+  color: var(--ink-3);
+  font-size: 13.5px;
+  margin: 0;
 }
 
-.subcategory-title {
-  font-size: 1.05rem;
+.subcat-section {
+  margin-bottom: 20px;
+}
+
+.subcat-title {
+  font-size: 13px;
   font-weight: 600;
-  color: var(--ink-soft);
-  margin: 0 0 0.875rem 0;
+  color: var(--vp-c-brand-1);
+  margin: 0 0 12px;
+  padding-left: 10px;
+  border-left: 3px solid #646cff;
+  letter-spacing: 0.02em;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  align-items: baseline;
 }
 
-.book-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cinnabar);
-}
-
-.article-count {
-  font-size: 0.7rem;
-  color: var(--ink-faint);
+.subcat-title .count {
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  color: var(--ink-4);
   font-weight: 400;
 }
 
-.article-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
 }
 
-.article-link {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.875rem 1rem;
-  background: var(--paper-soft);
-  border: 1px solid var(--line-soft);
-  border-radius: 4px;
+.post-item {
+  padding: 18px 20px;
+  background: #f9f9fc;
+  border-radius: 10px;
+  border-left: 3px solid #646cff;
   text-decoration: none;
-  transition: all 0.2s;
-}
-
-.article-link:hover {
-  background: var(--paper-card);
-  border-color: var(--line);
-  transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.06);
-}
-
-.link-arrow {
-  color: var(--ink-faint);
-  font-size: 1.3rem;
-  line-height: 1.2;
-  transition: color 0.2s, transform 0.2s;
-  flex-shrink: 0;
-}
-
-.article-link:hover .link-arrow {
-  color: var(--cinnabar);
-  transform: translateX(2px);
-}
-
-.link-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.article-title {
+  color: inherit;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
-  font-size: 1rem;
+}
+
+.subcat-section:nth-of-type(2) .post-item { border-left-color: #42b883; }
+.subcat-section:nth-of-type(3) .post-item { border-left-color: #ff8e6b; }
+.subcat-section:nth-of-type(4) .post-item { border-left-color: #f0b72f; }
+
+.post-item:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(100, 108, 255, 0.1);
+}
+
+.post-item .t {
+  display: block;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.25rem;
+  color: var(--ink-1);
   line-height: 1.4;
+  margin-bottom: 6px;
+  letter-spacing: -0.005em;
 }
 
-.article-link:hover .article-title {
-  color: var(--cinnabar);
+.post-item:hover .t {
+  color: var(--vp-c-brand-1);
 }
 
-.article-desc {
+.post-item .d {
   display: block;
-  font-size: 0.85rem;
-  color: var(--ink-muted);
-  line-height: 1.5;
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.55;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 1024px) {
-  .articles-page {
-    grid-template-columns: 1fr;
-  }
-  .left-sidebar {
-    position: static;
-  }
+.post-item .m {
+  display: block;
+  font-family: var(--vp-font-family-mono);
+  font-size: 11px;
+  color: var(--ink-4);
 }
 
 @media (max-width: 768px) {
   .articles-page {
-    padding: 1rem;
-  }
-  .content-wrapper {
-    padding: 1.5rem;
+    padding: 24px 20px 60px;
   }
 }
 </style>
